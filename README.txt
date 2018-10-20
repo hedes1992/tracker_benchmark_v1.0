@@ -1,7 +1,15 @@
+***********************************************************************************
+I just remove the results subfolder in tracker_benchmark_v1.0.zip to push to github
+The original results subfolder can be downloaded from http://cvlab.hanyang.ac.kr/tracker_benchmark/benchmark_v10.html
+In details, the results zip is tracker_benchmark_v1.0_results.zip. Just download and unzip to tracker_benchmark_v1.0
+***********************************************************************************
+
+original README.txt
+
 This code library is for research purpose only.
 We distribute our library under the GNU-GPL license.
 If you use this library or the dataset, please cite our paper:
-[1] Y. Wu, J. Lim, and M.-H. Yang, ¡°Online Object Tracking: A Benchmark,¡± in CVPR, 2013.
+[1] Y. Wu, J. Lim, and M.-H. Yang, ï¿½ï¿½Online Object Tracking: A Benchmark,ï¿½ï¿½ in CVPR, 2013.
 
 The project website is http://visual-tracking.net/ and the library will be updated on it.
  
