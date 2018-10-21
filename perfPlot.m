@@ -3,14 +3,16 @@ close all;
 clc
 
 addpath('./util');
+addpath('./rstEval');
 
+% 将标注路径加�?
 attPath = '.\anno\att\'; % The folder that contains the annotation files for sequence attributes
 
 attName={'illumination variation'	'out-of-plane rotation'	'scale variation'	'occlusion'	'deformation'	'motion blur'	'fast motion'	'in-plane rotation'	'out of view'	'background clutter' 'low resolution'};
 
 attFigName={'illumination_variations'	'out-of-plane_rotation'	'scale_variations'	'occlusions'	'deformation'	'blur'	'abrupt_motion'	'in-plane_rotation'	'out-of-view'	'background_clutter' 'low_resolution'};
 
-
+% 绘制�?��tracker
 plotDrawStyleAll={   struct('color',[1,0,0],'lineStyle','-'),...
     struct('color',[0,1,0],'lineStyle','-'),...
     struct('color',[0,0,1],'lineStyle','-'),...
@@ -46,6 +48,7 @@ plotDrawStyleAll={   struct('color',[1,0,0],'lineStyle','-'),...
     struct('color',[163,73,164]/255,'lineStyle','-.'),...%purple
     };
 
+% 只绘制前10�?
 plotDrawStyle10={   struct('color',[1,0,0],'lineStyle','-'),...
     struct('color',[0,1,0],'lineStyle','--'),...
     struct('color',[0,0,1],'lineStyle',':'),...
@@ -58,26 +61,25 @@ plotDrawStyle10={   struct('color',[1,0,0],'lineStyle','-'),...
     struct('color',[0,162,232]/255,'lineStyle','-'),...%Turquoise
     };
 
-seqs=configSeqs;
-
-trackers=configTrackers;
+seqs=configSeqs;% 列表的每�?��代表�?��待测的序列的名字和存储位置等
+trackers=configTrackers;% 列表的每�?��代表�?��待测的跟踪器的名字等
 
 % seqs = seqs(1:10);
 % trackers = trackers(1:10);
 
-numSeq=length(seqs);
-numTrk=length(trackers);
+numSeq=length(seqs);% 序列个数
+numTrk=length(trackers);% 待测跟踪器个�?
 
-nameTrkAll=cell(numTrk,1);
+nameTrkAll=cell(numTrk,1);% 每一项记录了每个跟踪器对应paper的名�?
 for idxTrk=1:numTrk
     t = trackers{idxTrk};
     nameTrkAll{idxTrk}=t.namePaper;
 end
 
-nameSeqAll=cell(numSeq,1);
-numAllSeq=zeros(numSeq,1);
+nameSeqAll=cell(numSeq,1);% 每一项记录每个序列的名字
+numAllSeq=zeros(numSeq,1);% 每一项记录每个序列包含的图像的张�?
 
-att=[];
+att=[];% 每一项记录每个序列的标注txt信息的位�?
 for idxSeq=1:numSeq
     s = seqs{idxSeq};
     nameSeqAll{idxSeq}=s.name;
@@ -101,6 +103,7 @@ end
 
 metricTypeSet = {'error', 'overlap'};
 evalTypeSet = {'SRE', 'TRE', 'OPE'};
+% evalTypeSet = {'OPE'};
 
 rankingType = 'AUC';%AUC, threshod
 
@@ -131,7 +134,7 @@ for i=1:length(metricTypeSet)
             yLabelName = 'Precision';
     end  
         
-    if strcmp(metricType,'error')&strcmp(rankingType,'AUC')
+    if strcmp(metricType,'error')&strcmp(rankingType,'AUC')% 在rankingType为AUC时，metricType为error时，不做进一步评�?
         continue;
     end
     
